@@ -1,0 +1,9 @@
+{% extends 'admin/_layout.html' %}{% block heading %}Manage Users{% endblock %}
+{% block head_action %}<a class="btn" href="{{ url_for('admin.user_new') }}">Create customer account</a>{% endblock %}
+{% block content %}
+<table><tr><th>Customer ID<th>Full name<th>Identity card<th>Address<th>Status<th>Action</tr>
+{% for u in users %}<tr><td>[{{ u.id }}]<td>{{ u.name }}<td>{{ u.idcard or '—' }}<td>{{ u.address or '—' }}
+  <td><span class="badge {{ 'locked' if u.locked else 'enabled' }}">{{ 'Locked account' if u.locked else 'Enabled account' }}</span>
+  <td><form method="post" action="{{ url_for('admin.lock_user', i=u.id) }}"><button class="btn btn-sm {{ 'btn-warn' if u.locked else 'btn-danger' }}">{{ 'Unfreeze an account' if u.locked else 'Account Freeze' }}</button></form></tr>
+{% else %}<tr><td colspan="6">No customers</tr>{% endfor %}</table>
+{% endblock %}
