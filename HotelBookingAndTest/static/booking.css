@@ -1,0 +1,13 @@
+/* ============ BOOKING: booking summary, price lines, voucher, payment (QR / card), success ============ */
+.summary{background:#fff;border-radius:22px;padding:20px;box-shadow:var(--shadow)}.summary-top{display:flex;gap:14px}.summary-top img{width:190px;height:100px;object-fit:cover;border-radius:8px}
+.price-lines div{display:flex;justify-content:space-between;font-size:18px;margin:10px 4px}.price-lines .total{font-size:26px;font-weight:800}.price-lines .total b:last-child{color:var(--blue)}
+.voucher-box{display:flex;gap:10px;align-items:center;padding:14px;border-radius:16px;border:1.5px dashed #9fb2ff;background:#f4f7ff;margin-top:12px}.voucher-box input{flex:1}
+.deposit-box{display:flex;justify-content:space-between;padding:14px;margin-top:10px;border-radius:14px;background:var(--light)}.deposit-box b:last-child{color:var(--blue);font-size:20px}
+/* payment: choose Momo/Bank (QR) or card – pure CSS, no JavaScript */
+.pay-choice{display:none}.pay-option{display:block;margin:8px 0;padding:12px;border:1.5px solid var(--line);border-radius:14px;font-weight:400;cursor:pointer}
+.pay-choice:checked+.pay-option{border-color:var(--blue);background:var(--light)}
+.pane{display:none;margin-top:14px}#pay-qr:checked~.pane-qr,#pay-card:checked~.pane-card{display:block}
+.qr-box{display:inline-block;padding:12px;background:#fff;border-radius:14px;box-shadow:var(--shadow-sm)}.qr-box svg{width:180px;height:180px}
+.success{max-width:620px;margin:20px auto;text-align:center}.success .tick{width:84px;height:84px;margin:auto;border-radius:50%;background:#e0f3e8;display:flex;align-items:center;justify-content:center}
+.success .tick span{width:62px;height:62px;border-radius:50%;background:#2e9a65;color:#fff;font-size:40px;line-height:62px}
+.confirm-box{text-align:left;margin:16px 0;padding:22px;border-radius:20px;background:var(--light)}.confirm-box div{display:flex;justify-content:space-between;margin:8px 0;color:#7a84a6;font-size:17px}
