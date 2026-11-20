@@ -1,0 +1,26 @@
+{% extends 'base.html' %}{% from '_macros.html' import summary, prices %}{% block title %}Payment{% endblock %}
+{% block body %}
+<main class="page"><div class="grid-2">
+  <div class="panel-light">
+    {{ summary(room, b.cin, b.cout, b.adults + b.kids) }}
+    <h2>Price Detail</h2>{{ prices(p) }}
+    <div class="price-lines"><div><span>Deposit (30%)</span><span>{{ p.deposit|money }}</span></div><div><span>Remaining (70%)</span><span>{{ p.remaining|money }}</span></div></div>
+  </div>
+  <form class="card wide" method="post">
+    <p class="right" style="color:var(--bad);font-weight:700">Room held until {{ hold_until }} (15 minutes)</p>
+    <b>1. Payment Method</b>
+    <input class="pay-choice" type="radio" name="method" value="momo" id="pay-qr" {{ 'checked' if pref != 'card' }}><label class="pay-option" for="pay-qr"><b>Momo / Bank payment</b><br><small class="muted">Scan the QR code with your MoMo or banking app</small></label>
+    <input class="pay-choice" type="radio" name="method" value="card" id="pay-card" {{ 'checked' if pref == 'card' }}><label class="pay-option" for="pay-card"><b>Credit / Debit card</b><br><small class="muted">Enter your card information</small></label>
+    <div class="pane pane-qr center"><b>2. Scan QR code to pay</b><br><br>
+      <div class="qr-box">{% if qr %}{{ qr }}{% else %}<code>MOMO|{{ b.code }}|{{ b.deposit }}</code>{% endif %}</div>
+      <div class="muted" style="font-size:12px">{{ b.code }} · {{ b.deposit|money }}</div></div>
+    <div class="pane pane-card"><b>2. Card Information</b>
+      <label>Card Holder name</label><input name="holder" placeholder="Enter card holder name">
+      <label>Card Number</label><input name="number" placeholder="1234 5678 912 345">
+      <div class="row"><div><label>Expiry Date</label><input name="expiry" placeholder="MM / YY"></div><div><label>CVV</label><input name="cvv" type="password" placeholder="123"></div></div></div>
+    <div class="row-between muted"><span>Deposit</span><span>{{ b.deposit|money }}</span></div>
+    <button class="btn btn-block" style="font-size:18px">Pay {{ b.deposit|money }}</button>
+    <p class="center muted" style="font-size:11px">🔒 Your payment information is encrypted and secure (card details are not stored).</p>
+  </form>
+</div></main>
+{% endblock %}

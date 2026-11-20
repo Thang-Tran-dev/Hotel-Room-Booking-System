@@ -1,0 +1,24 @@
+{% extends 'base.html' %}{% from '_macros.html' import summary, prices %}{% block title %}Booking{% endblock %}
+{% block body %}
+<main class="page"><h1>BOOKING HOTEL</h1><div class="grid-2">
+  <div>
+    {{ summary(room, d.cin, d.cout, d.adults + d.kids) }}
+    {{ prices(p) }}
+    <form class="voucher-box" method="post" action="{{ url_for('customer.add_voucher') }}">
+      <span class="logo"></span><input name="voucher" placeholder="Have a voucher code? Apply your promo code and enjoy"><button class="btn btn-sm">Apply</button></form>
+    {% for c in d.vouchers %}<div class="deposit-box"><b>[{{ c }}]</b><span class="muted">applied</span></div>{% endfor %}
+    <div class="deposit-box"><div><b>Deposit (30%)</b><br><small class="muted">Pay 30% now to confirm your booking.</small></div><b>{{ p.deposit|money }}</b></div>
+    <div class="row-between"><span>Remaining Balance (70%)</span><b style="color:var(--blue)">{{ p.remaining|money }}</b></div>
+  </div>
+  <form class="card wide" method="post" action="{{ url_for('customer.confirm_booking') }}">
+    <h2 style="margin:0">Guest Information</h2>
+    <label>Full Name</label><input name="name" value="{{ user.name }}" placeholder="Enter your full name" required>
+    <label>Email</label><input name="email" type="email" value="{{ user.email }}" placeholder="Enter your email" required>
+    <label>Phone number</label><input name="phone" value="{{ user.phone or '' }}" placeholder="Enter your phone number" required>
+    <label>Payment Method</label>
+    <label class="inline"><input type="radio" name="pm" value="momo" checked> Momo / Bank payment</label><br>
+    <label class="inline"><input type="radio" name="pm" value="card"> Credit / Debit card</label><br><br>
+    <button class="btn btn-block" style="font-size:18px">Confirm Booking</button>
+  </form>
+</div></main>
+{% endblock %}
