@@ -9,7 +9,7 @@
   <div>
     <form class="panel-light" method="post" action="{{ url_for('customer.start_booking', code=room.code) }}">
       <div class="row"><div><label>Check-in</label><input type="date" name="cin" min="{{ today }}" value="{{ today }}" required></div><div><label>Check-out</label><input type="date" name="cout" min="{{ today }}" value="{{ tomorrow }}" required></div></div>
-      <div class="row"><div><label>Children</label><input type="number" name="kids" min="0" value="0"></div><div><label>Adult</label><input type="number" name="adults" min="1" value="1"></div></div>
+      <div class="row"><div><label>Children</label><input type="number" name="kids" min="0" max="{{ room.cap - 1 }}" value="0"></div><div><label>Adult</label><input type="number" name="adults" min="1" value="1"></div></div>
       <label>Extra service</label><select name="service"><option value="">None</option>{% for s in room.services %}<option value="{{ s.code }}">{{ s.name }} (+${{ s.price|int }})</option>{% endfor %}</select>
       <p class="center"><b class="{{ 'ok' if room.free else '' }}" style="color:{{ 'var(--ok)' if room.free else 'var(--bad)' }}">{{ '✔ Available today' if room.free else '✖ Booked today – pick other dates' }}</b></p>
       <div class="center"><button class="btn btn-lg" style="font-size:16px;border-radius:20px">Book now</button></div>
@@ -17,7 +17,7 @@
     <h2 style="margin-bottom:2px">About this room</h2>{{ room.descr or '' }}<br><b>Services</b>
     {% for s in room.services %}<div>{{ s.name }}: ${{ s.price|int }}</div>{% else %}<div>—</div>{% endfor %}
     <div class="row-between"><b>Guest reviews · {{ room.rating }} / 5 ⭐</b>{% if room.canReview %}<a class="btn btn-sm" href="{{ url_for('customer.review', code=room.code) }}">Review this room</a>{% endif %}</div>
-    {% for v in room.list[:3] %}<div class="review-quote">“{{ v.text }}” - {{ v.name }}, {{ v.at }} <span class="star-on">{{ '★' * v.stars }}</span></div>{% endfor %}
+    {% for v in room.list[:3] %}<div class="review-quote">“{{ v.text }}” - {{ v.name }}, {{ v.at }} <span class="star-on">{{ '★' * v.stars }}</span>{% if v.img %}<div class="review-photos">{% for im in v.img.split(',') %}<a href="{{ im|room_image }}" target="_blank"><img src="{{ im|room_image }}" alt="Review photo"></a>{% endfor %}</div>{% endif %}</div>{% endfor %}
     <b>Cancellation policy</b><div>Free cancellation up to 24 hours before check-in. A 30% deposit is taken when you book.</div>
   </div>
 </div></main>

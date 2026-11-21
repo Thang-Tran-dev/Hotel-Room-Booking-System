@@ -1,0 +1,11 @@
+{# Layout shared by all admin pages: sidebar on the left, light-blue workspace on the right #}
+{% extends 'base.html' %}
+{% block body %}
+<div class="admin">
+  <aside class="sidebar"><div class="avatar-big"></div>
+    {% for key, label in [('bookings', 'Manage Bookings'), ('rooms', 'Manage rooms'), ('users', 'Manage users'), ('vouchers', 'Manage voucher'), ('services', 'Manage service'), ('revenue', 'Revenue Reports')] %}
+    <a class="{{ 'on' if active == key }}" href="{{ url_for('admin.' + key) }}">{{ label }}</a>{% endfor %}
+  </aside>
+  <section class="workspace"><div class="workspace-head"><h1>{% block heading %}{% endblock %}</h1>{% block head_action %}{% endblock %}</div>{% block content %}{% endblock %}</section>
+</div>
+{% endblock %}
