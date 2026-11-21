@@ -1,0 +1,8 @@
+/* ============ AFTER BOOKING: cancel dialog, review form + CSS star rating ============ */
+.bg-beach{display:flex;align-items:center;justify-content:center;min-height:calc(100vh - 54px);background:linear-gradient(rgba(10,30,90,.15),rgba(10,30,90,.3)),url(../images/beach.jpg) center/cover}
+.dialog{background:#fff;border-radius:20px;padding:26px;width:460px;max-width:94vw;box-shadow:0 30px 70px rgba(0,0,0,.3)}.dialog h1{margin:0 0 10px;text-align:center;border-bottom:1px solid #333}
+/* star rating (CSS only) */
+.stars{display:flex;flex-direction:row-reverse;justify-content:flex-end}.stars input{display:none}.stars label{margin:0;font-size:34px;color:#ccd3ea;cursor:pointer}
+.stars input:checked~label,.stars label:hover,.stars label:hover~label{color:#ffb800}
+.review-form{background:var(--light);border:1px solid #333;border-radius:24px;overflow:hidden}.review-form h2{margin:0;padding:14px;background:#fff}.review-form .body{padding:16px}
+.review-item{display:flex;gap:12px;margin-bottom:14px}.review-item .avatar{font-size:44px}
