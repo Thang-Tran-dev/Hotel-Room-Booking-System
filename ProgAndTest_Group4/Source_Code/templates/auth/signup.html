@@ -1,0 +1,13 @@
+{% extends 'auth/_split.html' %}{% block title %}Sign up{% endblock %}
+{% block form %}
+<div class="tabs"><a href="{{ url_for('guest.login') }}">Sign in</a><a class="on" href="{{ url_for('guest.signup') }}">Sign up</a></div>
+<form class="card" method="post">
+  <label>Email address</label><input name="email" type="email" placeholder="Email address" required>
+  <label>Full name</label><input name="name" placeholder="Enter your name" required>
+  <label>Phone number</label><input name="phone" placeholder="Enter your phone number" required>
+  <label>Password</label><input name="pw" type="password" placeholder="Enter your password" required>
+  <label>Confirm password</label><input name="pw2" type="password" placeholder="confirm your password" required><br>
+  <button class="btn btn-block">Sign up</button>
+  <p class="center">you have an account? <a href="{{ url_for('guest.login') }}">Sign in</a></p>
+</form>
+{% endblock %}

@@ -1,0 +1,67 @@
+/* ============ ADMIN: sidebar + light-blue work panel ============ */
+.admin{
+    display:flex
+}
+.sidebar{
+    width:230px;
+    padding:24px 18px
+}
+.avatar-big{
+    width:92px;
+    height:92px;
+    margin:0 auto 26px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#c9d6ff,#e8eeff);
+    box-shadow:var(--shadow-sm)
+}
+.sidebar a{
+    display:block;
+    margin:4px 0;
+    padding:11px 14px;
+    border-radius:12px;
+    font-size:13px;
+    font-weight:600;
+    text-decoration:none;
+    color:#43508a
+}
+.sidebar a:hover{
+    background:var(--light)
+}
+.sidebar a.on{background:var(--blue);
+    color:#fff
+}
+.workspace{
+    flex:1;
+    min-width:0;
+    overflow-x:auto;
+    margin:14px 28px 28px 0;
+    padding:28px;
+    border-radius:28px;
+    background:var(--light);
+    box-shadow:var(--shadow-sm)
+}
+.workspace h1{
+    margin:0 0 16px;
+    font-size:30px
+}
+.workspace-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center
+}
+.form-white{
+    background:#fff;
+    border-radius:20px;
+    padding:22px;
+    margin-bottom:16px
+}
+.fields{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
+    gap:4px 16px
+}
+.actions form{
+    display:inline-block;
+    margin:2px
+}
+@media(max-width:860px){.sidebar{display:none}.workspace{margin:10px}}

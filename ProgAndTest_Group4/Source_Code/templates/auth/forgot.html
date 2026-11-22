@@ -1,0 +1,9 @@
+{% extends 'auth/_split.html' %}{% block title %}Forgot password{% endblock %}
+{% block form %}
+<h2 style="color:var(--blue)">Forgot password</h2>
+<form class="card" method="post">
+  <label>Email address</label><input name="email" type="email" placeholder="Mobile number or email address" required><br>
+  <button class="btn btn-block">Reset password</button>
+  <p class="center">don't have an account? <a href="{{ url_for('guest.signup') }}">Sign up</a> · <a href="{{ url_for('guest.login') }}">Back to login</a></p>
+</form>
+{% endblock %}

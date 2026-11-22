@@ -1,0 +1,13 @@
+{% extends 'base.html' %}{% block title %}Payment successful{% endblock %}
+{% block body %}
+<main class="page"><div class="success">
+  <div class="tick"><span>✔</span></div>
+  <h1 style="color:#1b3a63">{{ 'Booking Received!' if at_hotel else 'Payment Successful!' }}</h1>
+  <div class="muted" style="font-size:13px">Your {{ 'booking is pending' if at_hotel else 'deposit has been received' }}. <b>check your email for invoice notifications</b></div>
+  <div class="confirm-box"><b style="font-size:18px;color:var(--text)">Booking Confirmation</b>
+    <div><span>Booking ID</span><span>{{ b.code }}</span></div><div><span>Hotel</span><span>Davue Hotel Da Nang</span></div><div><span>Room Type</span><span>{{ b.room }}</span></div></div>
+  <div class="row-between" style="padding:0 40px"><small>Deposit Paid (30%)</small><b style="color:var(--blue)">{{ '$0' if at_hotel else b.deposit|money }}</b></div>
+  <small class="muted">Remaining balance : {{ (b.total if at_hotel else b.total - b.deposit)|money }} Pay at the hotel</small>
+  <div class="row" style="margin-top:14px"><a class="btn" href="{{ url_for('customer.my_bookings') }}">View My Booking</a><a class="btn btn-outline" href="{{ url_for('guest.home') }}">Back to Home</a></div>
+</div></main>
+{% endblock %}

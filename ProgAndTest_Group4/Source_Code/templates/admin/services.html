@@ -1,0 +1,11 @@
+{% extends 'admin/_layout.html' %}{% block heading %}Manage Service{% endblock %}
+{% block content %}
+<form class="form-white" method="post" action="{{ url_for('admin.save_service') }}"><div class="fields">
+  <div><label>Service ID</label><input name="code" value="{{ e.code if e }}" {{ 'readonly' if e }} required></div><div><label>Service name</label><input name="name" value="{{ e.name if e }}" required></div>
+  <div><label>Price</label><input name="price" type="number" step="0.01" min="0" value="{{ e.price if e }}" required></div><div><label>Description</label><input name="descr" value="{{ e.descr if e }}"></div></div>
+  <br><button class="btn">Apply</button>{% if e %} <a href="{{ url_for('admin.services') }}" style="margin-left:16px"><b>Cancel</b></a>{% endif %}</form>
+<table><tr><th>Service ID<th>Service name<th>Price<th>Action</tr>
+{% for s in services %}<tr><td>[{{ s.code }}]<td>{{ s.name }}<td>{{ s.price|money }}
+  <td class="actions"><a class="btn btn-sm" href="{{ url_for('admin.services', edit=s.code) }}">Edit</a>
+  <form method="post" action="{{ url_for('admin.delete_service', code=s.code) }}"><button class="btn btn-sm btn-danger">Delete</button></form></tr>{% endfor %}</table>
+{% endblock %}

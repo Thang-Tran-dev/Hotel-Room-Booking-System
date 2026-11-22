@@ -1,0 +1,8 @@
+{% extends 'base.html' %}{% block title %}Add service{% endblock %}
+{% block body %}
+<div class="sky"><form class="card" method="post">
+  <h2 style="margin-top:0">Add extra service</h2><p class="muted">Booking {{ b.code }} · room {{ b.room }}</p>
+  <select name="service">{% for s in services %}<option value="{{ s.code }}">{{ s.name }} (+${{ s.price|int }})</option>{% endfor %}</select><br><br>
+  <div class="row-between"><a href="{{ url_for('customer.my_bookings') }}"><b>cancel</b></a><button class="btn">Add</button></div>
+</form></div>
+{% endblock %}

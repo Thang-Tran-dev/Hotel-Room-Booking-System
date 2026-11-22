@@ -1,0 +1,19 @@
+{% extends 'base.html' %}{% block title %}Review{% endblock %}
+{% block body %}
+<main class="page"><div class="grid-2">
+  <form class="review-form" method="post" enctype="multipart/form-data">
+    <h2>Review of the {{ 'Luxury Ocean View' if room.type == 'DLX' else room.code }} Room</h2>
+    <div class="body">
+      <b>1. Rating star mark</b>
+      <div class="stars">{% for n in (5, 4, 3, 2, 1) %}<input type="radio" name="stars" id="s{{ n }}" value="{{ n }}" {{ 'checked' if n == 5 }}><label for="s{{ n }}">★</label>{% endfor %}</div>
+      <b>2. Detailed Description</b><textarea name="text" rows="7" placeholder="Write your review of this room" required></textarea>
+      <div class="upload"><b>3. Add images</b><input type="file" name="image" accept="image/*" multiple></div>
+      <button class="btn btn-block" style="font-size:20px">Submit review</button><br>
+      <div class="center"><a class="btn btn-outline" href="{{ url_for('customer.my_bookings') }}">Cancel</a></div>
+    </div>
+  </form>
+  <div><h2 class="center">previous reviews</h2>
+    <div class="card wide">{% for v in (room.list if show_all else room.list[:2]) %}<div class="review-item"><span class="avatar">👤</span><div><b style="font-size:20px">{{ v.name }}</b><div class="star-on">{{ '★' * v.stars }}</div><div>{{ v.text }}</div>{% if v.img %}<div class="review-photos">{% for im in v.img.split(',') %}<a href="{{ im|room_image }}" target="_blank"><img src="{{ im|room_image }}" alt="Review photo"></a>{% endfor %}</div>{% endif %}</div></div>{% else %}No reviews yet{% endfor %}
+      {% if not show_all and room.list|length > 2 %}<div class="center"><a class="view-more" href="{{ url_for('customer.review', code=room.code, b=request.args.get('b'), all=1) }}">View more</a></div>{% endif %}</div></div>
+</div></main>
+{% endblock %}

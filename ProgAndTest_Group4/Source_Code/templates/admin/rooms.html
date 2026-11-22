@@ -1,0 +1,18 @@
+{% extends 'admin/_layout.html' %}{% block heading %}{{ 'Edit room ' ~ e.code if e else 'Add New Room' }}{% endblock %}
+{% block content %}
+<form class="form-white" method="post" action="{{ url_for('admin.save_room') }}" enctype="multipart/form-data"><div class="fields">
+  <div><label>Room ID</label><input name="code" value="{{ e.code if e }}" {{ 'readonly' if e }} required></div>
+  <div><label>Room Type</label><select name="type">{% for t in types %}<option value="{{ t.type_id }}" {{ 'selected' if e and e.type == t.type_id }}>{{ t.type_id }} – {{ t.type_name }}</option>{% endfor %}</select></div>
+  <div><label>Price per night</label><input name="price" type="number" step="0.01" min="0" value="{{ e.price if e }}" required></div>
+  <div><label>Area (m²)</label><input name="area" type="number" step="0.1" min="0" value="{{ e.area if e }}"></div>
+  <div><label>Capacity</label><input name="cap" type="number" min="1" value="{{ e.cap if e }}" required></div>
+  <div><label>Service (codes, comma-separated)</label><input name="svc" value="{{ e.svc if e }}"></div>
+  <div><label>Description</label><input name="descr" value="{{ e.descr if e }}"></div>
+  <div><label>Image (upload from your computer)</label><input type="file" name="image" accept="image/*"><input type="hidden" name="img" value="{{ e.img if e }}">{% if e %}<small class="muted">Current: {{ e.img }}</small>{% endif %}</div>
+</div><br><button class="btn">Apply</button>{% if e %} <a href="{{ url_for('admin.rooms') }}" style="margin-left:16px"><b>Cancel</b></a>{% endif %}</form>
+<form class="form-white" method="post" action="{{ url_for('admin.add_room_type') }}"><div class="fields"><div><label>New room type ID</label><input name="type_id" placeholder="e.g. FAM" required></div><div><label>Type name</label><input name="type_name" placeholder="e.g. Family" required></div></div><br><button class="btn btn-sm">+ Add room type</button></form>
+<table><tr><th>Room ID<th>Type<th>Price<th>Capacity<th>Description<th>Area<th>Action</tr>
+{% for r in rooms %}<tr><td>[{{ r.code }}]<td>[{{ r.type }}]<td>{{ r.price|money }}<td>{{ r.cap }}<td>{{ r.descr or '' }}<td>{{ r.area|int }} m²
+  <td class="actions"><a class="btn btn-sm" href="{{ url_for('admin.rooms', edit=r.code) }}">Edit</a>
+  <form method="post" action="{{ url_for('admin.delete_room', code=r.code) }}"><button class="btn btn-sm btn-danger">Delete</button></form></tr>{% endfor %}</table>
+{% endblock %}

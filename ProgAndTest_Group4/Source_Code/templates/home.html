@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block body %}
+<main class="page">
+  <section class="hero-box">
+    <div><h1>Find Your Perfect Room</h1><p>Discover amazing hotels, great prices and unforgettable experiences.</p>
+      <a class="btn btn-lg" href="{{ url_for('guest.rooms') }}">View Hotels</a></div>
+    <img src="{{ url_for('static', filename='images/r1.jpg') }}" alt="Room">
+  </section>
+  <form class="search-bar" action="{{ url_for('guest.rooms') }}" method="get">
+    <div><label>Room</label><input name="q" placeholder="Enter your favorite rooms"></div>
+    <div><label>Check-in and check out</label><div class="row"><input type="date" name="cin" min="{{ today }}" value="{{ today }}"><input type="date" name="cout" min="{{ tomorrow }}" value="{{ tomorrow }}"></div></div>
+    <button class="btn">SEARCH 🔍</button>
+  </form>
+  <div class="tiles">
+    <a class="tile" style="background-image:url({{ url_for('static', filename='images/r2.jpg') }})" href="{{ url_for('guest.rooms') }}">Comfortable</a>
+    <a class="tile" style="background-image:url({{ url_for('static', filename='images/r3.jpg') }})" href="{{ url_for('guest.rooms', q='SUI') }}">Beautiful view</a>
+    <a class="tile" style="background-image:url({{ url_for('static', filename='images/r4.jpg') }})" href="{{ url_for('guest.rooms', avail='1') }}">Clean</a>
+  </div>
+</main>
+{% endblock %}

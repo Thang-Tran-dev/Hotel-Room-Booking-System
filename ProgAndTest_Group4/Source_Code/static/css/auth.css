@@ -1,0 +1,44 @@
+/* ============ AUTH: sign in / sign up / forgot password / change password ============ */
+.split{
+    display:flex;
+    min-height:calc(100vh - 54px)
+}
+.split-photo{
+    flex:0 0 44%;
+    display:flex;
+    align-items:center;
+    padding:40px;
+    color:#fff;
+    font-size:26px;
+    font-weight:800;
+    line-height:1.35;
+    text-shadow:0 2px 12px rgba(0,0,0,.35);
+    background:linear-gradient(180deg,rgba(10,30,90,.05),rgba(10,30,90,.45)),url(../images/beach.jpg) center/cover
+}
+.split-form{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:30px;
+    background:#f8faff
+}
+.tabs{
+    display:flex;
+    gap:40px;
+    margin-bottom:18px;
+    font-size:20px;
+    font-weight:700
+}
+.tabs a{
+    color:#aab3d1;
+    text-decoration:none;
+    padding:4px 14px;
+    border-bottom:3px solid transparent
+}
+.tabs a.on{
+    color:var(--blue);
+    border-bottom-color:var(--blue)
+}
+@media(max-width:860px){.split{flex-direction:column}.split-photo{flex:none;min-height:200px;font-size:20px}}

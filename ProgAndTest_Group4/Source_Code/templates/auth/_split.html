@@ -1,0 +1,8 @@
+{# Layout shared by login / signup / forgot: photo on the left, form on the right #}
+{% extends 'base.html' %}
+{% block body %}
+<div class="split">
+  <div class="split-photo"><p>Discover Comfort, Embrace Luxury<br>Make Every Stay Memorable</p></div>
+  <div class="split-form">{% block form %}{% endblock %}</div>
+</div>
+{% endblock %}

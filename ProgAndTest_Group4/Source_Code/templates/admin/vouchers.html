@@ -1,0 +1,12 @@
+{% extends 'admin/_layout.html' %}{% block heading %}Manage Voucher{% endblock %}
+{% block content %}
+<form class="form-white" method="post" action="{{ url_for('admin.save_voucher') }}"><div class="fields">
+  <div><label>Voucher ID</label><input name="code" value="{{ e.code if e }}" {{ 'readonly' if e }} required></div>
+  <div><label>discount percent</label><input name="pct" type="number" min="1" max="100" step="0.5" value="{{ e.pct if e }}" required></div>
+  <div><label>In date</label><input name="start" type="date" value="{{ e.start if e }}" required></div><div><label>expired</label><input name="end" type="date" value="{{ e.end if e }}" required></div>
+  <div><label>condition</label><input name="cond" value="{{ e.cond if e }}"></div></div><br><button class="btn">Apply</button>{% if e %} <a href="{{ url_for('admin.vouchers') }}" style="margin-left:16px"><b>Cancel</b></a>{% endif %}</form>
+<table><tr><th>Voucher ID<th>Discount percent<th>In date<th>Expiry date<th>Is valid<th>Action</tr>
+{% for v in vouchers %}<tr><td>[{{ v.code }}]<td>{{ v.pct|int }}%<td>{{ v.start }}<td>{{ v.end }}<td><span class="badge {{ 'valid' if v.state == 'still valid' else 'invalid' }}">{{ v.state }}</span>
+  <td class="actions"><a class="btn btn-sm" href="{{ url_for('admin.vouchers', edit=v.code) }}">Edit</a>
+  <form method="post" action="{{ url_for('admin.toggle_voucher', code=v.code) }}"><button class="btn btn-sm btn-yellow">{{ 'Disable' if v.active else 'Enable' }}</button></form></tr>{% endfor %}</table>
+{% endblock %}

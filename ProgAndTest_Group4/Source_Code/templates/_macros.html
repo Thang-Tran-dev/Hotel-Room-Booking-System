@@ -1,0 +1,16 @@
+{# Room summary card shown on the booking and payment pages #}
+{% macro summary(room, cin, cout, guests) %}
+<div class="summary">
+  <div class="summary-top"><img src="{{ room.img|room_image }}" alt="">
+    <div><b>Davue Hotel Da Nang</b><div class="star-on">{{ '★' * ((room.rating or 5)|round|int) }} <b class="muted">{{ room.rating or '—' }}</b></div><small>📍 My An, Ngu Hanh Son</small></div></div>
+  <p>Room Type &nbsp; <b>{{ room.code }}</b><br>Check-in &nbsp; {{ cin }}<br>Check-out &nbsp; {{ cout }}<br>Room &amp; Guest &nbsp; {{ guests }} Guest, 1 Room</p>
+</div>
+{% endmacro %}
+{# Price lines (room, services, voucher, VAT, total) #}
+{% macro prices(p) %}
+<div class="price-lines">
+  <div><b>Room Price</b><span>{{ p.room|money }}</span></div><div><b>Extra service</b><span>{{ p.extra_service|money }}</span></div>
+  {% if p.discount %}<div><b>Voucher</b><span>-{{ p.discount|money }}</span></div>{% endif %}
+  <div><b>VAT</b><span>{{ p.vat|money }}</span></div><div class="total"><b>Total</b><b>{{ p.total|money }}</b></div>
+</div>
+{% endmacro %}

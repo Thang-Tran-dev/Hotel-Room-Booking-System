@@ -1,0 +1,13 @@
+{% extends 'base.html' %}{% block title %}Profile{% endblock %}
+{% block body %}
+<main class="page"><form class="panel-light" method="post">
+  <div class="form-white"><h1 style="margin:0">Personal Information</h1>
+    <label>Full Name</label><input name="name" value="{{ p.name or '' }}" required>
+    <div class="row"><div><label>Phone Number</label><input name="phone" value="{{ p.phone or '' }}" placeholder="Enter your phone number" required></div><div><label>Email</label><input value="{{ p.email }}" disabled></div></div>
+    <label>Identity Card</label><input name="idcard" value="{{ p.idcard or '' }}" placeholder="Enter your identity card">
+    <label>Address</label><input name="address" value="{{ p.address or '' }}" placeholder="Enter your address">
+    <div class="row"><div><label>Date of birth</label><input type="date" name="dob" value="{{ p.dob or '' }}"></div>
+      <div><label>sex</label><select name="sex"><option value="">—</option><option {{ 'selected' if p.sex == 'Male' }}>Male</option><option {{ 'selected' if p.sex == 'Female' }}>Female</option></select></div></div></div>
+  <div class="row-between" style="justify-content:space-around"><button class="btn btn-lg" style="font-size:18px">Save Change</button><a href="{{ url_for('customer.password') }}" style="font-size:18px">Change password</a></div>
+</form></main>
+{% endblock %}

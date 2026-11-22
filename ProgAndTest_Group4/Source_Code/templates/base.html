@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}Hotel Booking{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  {% for css in ['base', 'auth', 'rooms', 'booking', 'after_booking', 'admin'] %}<link rel="stylesheet" href="{{ url_for('static', filename='css/' + css + '.css') }}">{% endfor %}
+</head>
+<body>
+<nav class="navbar">
+  <a class="brand" href="{{ url_for('guest.home') }}"><span class="logo"></span>Home</a>
+  <a href="{{ url_for('customer.my_bookings') }}">My booking</a>
+  <a href="{{ url_for('customer.profile') }}">Profile</a>
+  {% if user and user.role == 'admin' %}<a href="{{ url_for('admin.bookings') }}">⚙ Management</a>{% endif %}
+  <span class="spacer"></span>
+  {% if user %}
+    <form method="post" action="{{ url_for('guest.logout') }}"><button class="btn">Logout</button></form>
+  {% else %}
+    <a class="muted" href="{{ url_for('guest.login') }}">Sign in</a><a class="btn" href="{{ url_for('guest.signup') }}">Sign up</a>
+  {% endif %}
+</nav>
+{% for category, message in get_flashed_messages(with_categories=true) %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}
+{% block body %}{% endblock %}
+</body>
+</html>
